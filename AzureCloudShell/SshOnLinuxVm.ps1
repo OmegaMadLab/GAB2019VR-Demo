@@ -74,6 +74,7 @@ else {
 	$pip = Get-AzPublicIpAddress | ? Name -like "$vmName*"
 	Write-Host "VM already exists. Connect with: ssh azureuser@$($pip.DnsSettings.Fqdn)"
 }
-
+# Removing known_hosts if present
+ssh-keygen -f "/home/marco/.ssh/known_hosts" -R $pip.DnsSettings.Fqdn
 
 
