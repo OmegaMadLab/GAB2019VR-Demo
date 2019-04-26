@@ -3,6 +3,9 @@ $vmName = "gab2019vr-demo-linux"
 
 ##
 
+# Removing known_hosts if present
+ssh-keygen -f "/home/marco/.ssh/known_hosts" -R $pip.DnsSettings.Fqdn
+
 # Create new RG
 $rg = Get-AzResourceGroup -Name "GAB2019VR-Demo-RG" -Location "WestEurope" -ErrorAction SilentlyContinue
 if(!$rg) {
@@ -68,13 +71,11 @@ if(!$vm) {
         -Location $rg.Location `
 		-VM $vmConfig
 		
-	Write-Host "VM created. Connect with: ssh azureuser@$($pip.DnsSettings.Fqdn)"
+	Write-Host -ForegroundColor Green "VM created. Connect with: ssh azureuser@$($pip.DnsSettings.Fqdn)"
 }
 else {
-	$pip = Get-AzPublicIpAddress | ? Name -like "$vmName*"
-	Write-Host "VM already exists. Connect with: ssh azureuser@$($pip.DnsSettings.Fqdn)"
+	$pip = Get-AzPublicIpAddress | Where-Object Name -like "$vmName*"
+	Write-Host -ForegroundColor Green "VM already exists. Connect with: ssh azureuser@$($pip.DnsSettings.Fqdn)"
 }
-# Removing known_hosts if present
-ssh-keygen -f "/home/marco/.ssh/known_hosts" -R $pip.DnsSettings.Fqdn
 
 
