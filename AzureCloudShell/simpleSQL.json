@@ -1,0 +1,76 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "administratorLogin": {
+        "type": "string"
+      },
+      "administratorLoginPassword": {
+        "type": "securestring"
+      },
+      "databaseName": {
+        "type": "string"
+      }
+    },
+    "variables": {
+      "sqlserverName": "[concat('sqlserver', uniqueString(resourceGroup().id))]",
+      "collation": "SQL_Latin1_General_CP1_CI_AS",
+      "edition": "basic",
+      "requestedServiceObjectiveName": "basic",
+      "maxSizeBytes": "1073741824"
+    },
+    "resources": [
+      {
+        "name": "[variables('sqlserverName')]",
+        "type": "Microsoft.Sql/servers",
+        "location": "[resourceGroup().location]",
+        "tags": {
+          "displayName": "SqlServer"
+        },
+        "apiVersion": "2014-04-01-preview",
+        "properties": {
+          "administratorLogin": "[parameters('administratorLogin')]",
+          "administratorLoginPassword": "[parameters('administratorLoginPassword')]"
+        },
+        "resources": [
+          {
+            "name": "[parameters('databaseName')]",
+            "type": "databases",
+            "location": "[resourceGroup().location]",
+            "apiVersion": "2014-04-01-preview",
+            "dependsOn": [
+              "[resourceId('Microsoft.Sql/servers/', variables('sqlserverName'))]"
+            ],
+            "properties": {
+              "edition": "[variables('edition')]",
+              "collation": "[variables('collation')]",
+              "maxSizeBytes": "[variables('maxSizeBytes')]",
+              "requestedServiceObjectiveName": "[variables('requestedServiceObjectiveName')]"
+            }
+          },
+          {
+            "type": "firewallrules",
+            "apiVersion": "2014-04-01-preview",
+            "dependsOn": [
+              "[resourceId('Microsoft.Sql/servers/', variables('sqlserverName'))]"
+            ],
+            "location": "[resourceGroup().location]",
+            "name": "OpenAll",
+            "properties": {
+              "startIpAddress": "0.0.0.0",
+              "endIpAddress": "255.255.255.255"
+            }
+          }
+        ]
+      }
+    ],
+    "outputs": {
+      "SqlParameters": {
+         "type": "object",
+         "value": {
+            "SqlUri": "[reference(resourceId('Microsoft.Sql/servers/', variables('sqlserverName'))).fullyQualifiedDomainName]",
+            "SqlServerName": "[variables('sqlserverName')]"
+          }
+      }
+    }
+  }

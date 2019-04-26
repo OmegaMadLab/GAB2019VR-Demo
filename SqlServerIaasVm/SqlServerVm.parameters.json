@@ -1,0 +1,93 @@
+{
+    "$schema":  "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion":  "1.0.0.0",
+    "parameters":  {
+                       "vmName":  {
+                                      "value":  "GAB2019VR-SqlVm"
+                                  },
+                       "availabilitySetName":  {
+                                                   "value":  "GAB2019VR-Sql-AvSet"
+                                               },
+                       "adminUsername":  {
+                                             "value":  "OmegaAdmin"
+                                         },
+                       "adminPassword":  {
+                                             "value":  "Passw0rd1"
+                                         },
+                       "vnetName":  {
+                                        "value":  "Gab2019VrDemoVnet"
+                                    },
+                       "vnetResourceGroup":  {
+                                                 "value":  "GAB2019VR-Demo-RG"
+                                             },
+                       "subnetName":  {
+                                          "value":  "Subnet1"
+                                      },
+                       "privateIp":  {
+                                         "value":  "dhcp"
+                                     },
+                       "enableAcceleratedNetworking":  {
+                                                           "value":  "Yes"
+                                                       },
+                       "enablePublicIP":  {
+                                              "value":  "Yes"
+                                          },
+                       "dnsLabelPrefix":  {
+                                              "value":  "gab2019vr-sqlvm"
+                                          },
+                       "sqlVersion":  {
+                                          "value":  "SQL Server 2017 Developer (free) on Windows Server 2016"
+                                      },
+                       "vmSize":  {
+                                      "value":  "Standard_DS2_v2"
+                                  },
+                       "useAHB":  {
+                                      "value":  "No"
+                                  },
+                       "timeZone":  {
+                                        "value":  "(UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna"
+                                    },
+                       "osDiskSuffix":  {
+                                            "value":  "OsDisk"
+                                        },
+                       "AdditionalDiskSuffix":  {
+                                                    "value":  "DataDisk"
+                                                },
+                       "storageSKU":  {
+                                          "value":  "Premium_LRS"
+                                      },
+                       "workloadType":  {
+                                            "value":  "OLTP"
+                                        },
+                       "#ofDataDisks":  {
+                                            "value":  2
+                                        },
+                       "dataDisksSize":  {
+                                             "value":  32
+                                         },
+                       "stripeDataDisks":  {
+                                               "value":  "Yes"
+                                           },
+                       "#ofLogDisks":  {
+                                           "value":  1
+                                       },
+                       "logDisksSize":  {
+                                            "value":  32
+                                        },
+                       "stripeLogDisks":  {
+                                              "value":  "No"
+                                          },
+                       "#ofAdditionalDisks":  {
+                                                  "value":  1
+                                              },
+                       "additionalDisksSize":  {
+                                                   "value":  32
+                                               },
+                       "diagStorageAccountName":  {
+                                                      "value":  ""
+                                                  },
+                       "EnableSqlIaasExtension":  {
+                                                      "value":  "Yes"
+                                                  }
+                   }
+}
