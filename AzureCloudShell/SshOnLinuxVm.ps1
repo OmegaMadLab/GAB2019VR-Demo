@@ -4,7 +4,7 @@ $vmName = "gab2019vr-demo-linux"
 ##
 
 # Removing known_hosts if present
-ssh-keygen -f "/home/marco/.ssh/known_hosts" -R $pip.DnsSettings.Fqdn
+ssh-keygen -f "/home/marco/.ssh/known_hosts" -R $($pip.DnsSettings.Fqdn)
 
 # Create new RG
 $rg = Get-AzResourceGroup -Name "GAB2019VR-Demo-RG" -Location "WestEurope" -ErrorAction SilentlyContinue

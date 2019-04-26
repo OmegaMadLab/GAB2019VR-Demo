@@ -1,3 +1,3 @@
-dotnet new razor -o HelloWorldAspNetCore --force
-cd HelloWorldAspNetCore
+dotnet new razor -o $HOME/HelloWorldAspNetCore --force
+cd $HOME/HelloWorldAspNetCore
 dotnet run --urls=http://localhost:2226
