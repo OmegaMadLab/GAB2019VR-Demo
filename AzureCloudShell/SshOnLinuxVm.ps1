@@ -56,7 +56,8 @@ if(!$vm) {
 
     Write-Host "Creating SSH key pairs..."
 
-    # Generate SSH keys in Cloud Shell
+	# Generate SSH keys in Cloud Shell - archived on persistent storage for demo purposes
+	# It's better to use integration with Azure Key Vault, accessing it via Managed Service Identity
     ssh-keygen -t rsa -b 2048 -f $HOME/.ssh/id_rsa 
 
     # Ensure VM config is updated with SSH keys
